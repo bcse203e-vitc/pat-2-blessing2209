@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Dark Mode</title>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <style>
+    body {
+      background-color: #f0f0f0;
+      color: #333;
+      transition: background-color 0.3s, color 0.3s;
+    }
+    .dark-mode {
+      background-color: #121212;
+      color: #f0f0f0;
+    }
+  </style>
+</head>
+<body>
+  <h2>Dark Mode Toggle</h2>
+  <label>
+    <input type="checkbox" id="darkModeToggle"> Enable Dark Mode
+  </label>
+  <script>
+    $(document).ready(function(){
+      $("#darkModeToggle").change(function(){
+        $("body").toggleClass("dark-mode");
+      });
+    });
+  </script>
+</body>
+</html>
+
+
+
+
+

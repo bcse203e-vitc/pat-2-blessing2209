@@ -1,0 +1,66 @@
+!DOCTYPE html>
+<html>
+<head>
+  <title>Dynamic Form Builder</title>
+</head>
+<body>
+  <h2>Dynamic Form Builder</h2>
+  <form id="form">
+    <select id="type">
+      <option value="">Select input type</option>
+      <option value="text">Text</option>
+      <option value="email">Email</option>
+      <option value="password">Password</option>
+    </select><br>
+    <button type="button" id="add">Add</button>
+    <div id="fields"></div>
+    <button type="submit">Submit</button>
+  </form>
+  <div id="msg"></div>
+  <script>
+    let type = document.getElementById("type")
+    let add = document.getElementById("add")
+    let fields = document.getElementById("fields")
+    let form = document.getElementById("form")
+    let msg = document.getElementById("msg")
+    add.onclick = function() {
+      if(type.value) {
+        let input = document.createElement("input")
+        input.type = type.value
+        input.placeholder = "Enter " + type.value
+        input.className = "field"
+        fields.appendChild(input)
+      }
+    }
+    form.onsubmit = function(e) {
+      e.preventDefault()
+      let valid = true
+      msg.innerText = ""
+      let inputs = fields.querySelectorAll("input")
+      inputs.forEach(i => {
+        let value = i.value.trim()
+        if(i.type === "text") {
+          if(!/^[A-Za-z\s]+$/.test(value)) valid = false
+        }
+        if(i.type === "email") {
+          if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(value)) valid = false
+        }
+        if(i.type === "password") {
+          if(!/^(?=.*[A-Z])(?=.*\d).{8,}$/.test(value)) valid = false
+        }
+      })
+      if(valid) {
+        msg.style.color = "green"
+        msg.innerText = "All inputs are valid"
+      } else {
+        msg.style.color = "red"
+        msg.innerText = "Some inputs are invalid"
+      }
+    }
+  </script>
+</body>
+</html>
+
+
+
+
